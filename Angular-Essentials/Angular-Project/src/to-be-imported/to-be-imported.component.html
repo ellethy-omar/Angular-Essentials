@@ -1,0 +1,13 @@
+<div class = "container">
+    <hr>
+    <div *ngIf ="reveal ===false">
+        This is an ngIf test click to hide it
+        {{apes}}
+    </div>
+    <button class="btn btn-danger" *ngIf="reveal ===false" (click)="onReveal()">
+        Hide
+    </button>
+    <button class="btn btn-success" *ngIf="reveal ===true" (click)="onReveal()">
+        Reveal
+    </button>
+</div>

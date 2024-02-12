@@ -1,0 +1,67 @@
+<div class = "row">
+    <br>
+    <input 
+    tpye ="text"
+    class="form-control" 
+    [(ngModel)] = "DummyString">
+    <br>
+    <button *ngIf="DummyString.length!==0" class ="btn-primary" (click)="addData(DummyString)">
+        Add a statement
+    </button>
+    <div *ngIf="DummyString ===''">
+        <strong style="color: red;">Make sure the field is not empty to make button available</strong>
+    </div>
+    <br>
+    <div class = "col-4-3" *ngFor="let ape of data">
+        {{data}}
+    </div>
+    <hr>
+    <div class="pull-right">
+        <div class="container">
+            <form 
+            [formGroup]="form"
+            (ngSubmit) ="onSubmit(form.value)">
+                <ul>
+                    <li>
+                        <label for="medium">Medium</label>
+                        <select name = "medium" id ="medium" formControlName="medium">
+                            <option value = "Movies">Movies</option>
+                            <option value = "Series">Series</option>
+                        </select>   
+                    </li>
+                    <li>
+                        <label>Name</label>
+                        <input type = "text" name = "name" id ="name" formControlName="name">
+                        <div *ngIf="form.get('name')?.hasError('pattern')" style = "color: red;">
+                            Invalid Charecters
+                        </div>
+                    </li>
+                    <li>
+                        <label for = "Category">Category</label>
+                        <select name = "Category" id="Category" formControlName="category">
+                            <option value="Action">Action</option>
+                            <option value="Romance">Romance</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label>Year</label>
+                        <input type ="number" name = "Year" id = "Year" formControlName="year">
+                    </li>
+                </ul>
+                <button [ngClass]="!form.valid ===false ? 'btn btn-success' : 'btn btn-danger'" type="submit" [disabled]="!form.valid">Submit</button>
+            </form>
+        </div>
+        <br>
+        <div class="container pull-left" [ngClass]="item.category==='Action' ? 'bg-success' : 'bg-danger'" *ngFor="let item of mediaitemlist" style="max-width: 200px; color: rgb(7, 13, 132);">
+            <strong> {{item.name}}</strong> <br>
+            {{item.category}} <br>
+            {{item.medium}}  <br>
+            {{item.year}} <br>
+            <button class="btn btn-danger" (click)="onDelete(item)">Remove</button>
+        </div>
+    </div>
+    <tbody>
+        <app-to-be-imported></app-to-be-imported>
+    </tbody>
+</div>
+    
